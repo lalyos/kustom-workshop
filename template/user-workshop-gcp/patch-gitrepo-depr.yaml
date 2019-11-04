@@ -1,0 +1,17 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: session
+spec:
+  template:
+    spec:
+      volumes:
+        - name: gitrepo
+          gitRepo:
+            repository: http://github.com/lalyos/timber
+            directory: .
+      containers:
+      - name: dev
+        volumeMounts:
+          - mountPath: /root/workshop
+            name: gitrepo

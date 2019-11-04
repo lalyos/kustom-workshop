@@ -1,0 +1,25 @@
+bases:
+- ../../base-workshop
+
+nameSuffix: -user3
+commonLabels:
+  user: user3
+
+images:
+- name: lalyos/k8s-workshop
+  newName: localhost:5442/workshop-test
+  newTag: d4371
+  
+# patchesJson6902:
+# - target:
+#     group: apps
+#     version: v1beta1
+#     kind: Deployment
+#     name: session
+#     namespace: workshop
+#   path: patch-delete-volume.yaml
+
+patchesStrategicMerge:
+- patch-gitrepo-depr.yaml
+- patch-nodeselector.yaml
+

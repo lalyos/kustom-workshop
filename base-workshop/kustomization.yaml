@@ -1,0 +1,28 @@
+namespace: workshop
+
+bases:
+  - ../init
+
+resources:
+  - sa.yaml
+  - cluster-role-bindings.yaml
+  - deploy.yaml
+
+vars:
+- name: SESSION
+  objref: 
+    kind: ServiceAccount
+    apiVersion: v1
+    name: sa
+  fieldref:
+    fieldpath: metadata.labels.user
+- name: DOMAIN
+  objref: 
+    kind: ConfigMap
+    apiVersion: v1
+    name: common-config
+  fieldref:
+    fieldpath: data.domain
+
+configurations:
+  - varreference.yaml

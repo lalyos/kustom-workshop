@@ -1,0 +1,10 @@
+- op: replace
+  path: /spec/template/spec/volumes
+  value: [ {
+    "name":"gitrepo",
+    "gitRepo":{
+       "repository": "http://github.com/lalyos/timber", 
+       "directory": "."
+    }
+  }]
+  

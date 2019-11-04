@@ -1,0 +1,9 @@
+nameSuffix: -user3
+commonLabels:
+  user: user3
+
+bases:
+- ../../base-workshop
+
+patchesStrategicMerge:
+- patch-gitrepo.yaml
