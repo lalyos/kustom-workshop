@@ -1,0 +1,16 @@
+
+resources:
+  - namespace.yaml
+  - rbac.yaml
+
+vars:
+- name: USER
+  objref: 
+    kind: Namespace
+    apiVersion: v1
+    name: ns
+  fieldref:
+    fieldpath: metadata.labels.user
+
+configurations:
+  - varreference.yaml

@@ -1,0 +1,9 @@
+#nameSuffix: -play
+nameSuffix: -play-user0
+commonLabels:
+  user: user0
+
+bases:
+- ../../base/ns
+
+namespace: ns-play-user0

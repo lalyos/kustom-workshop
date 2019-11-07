@@ -1,0 +1,76 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: session
+  name: session
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: session
+  template:
+    metadata:
+      labels:
+        app: session
+    spec:
+      serviceAccountName: sa
+      containers:
+      - args:
+        - gotty
+        - "-w"
+        - "--credential=user:$(SECRET)"
+        - "--title-format=$(SESSION)"
+        #- tmux
+        - bash
+        env:
+          - name: SECRET
+            valueFrom:
+              secretKeyRef:
+                  key: password
+                  name: session-secret
+          - name: NS
+            value: ns-$(SESSION)
+          - name: TILLER_NAMESPACE
+            value: ns-$(SESSION)
+          - name: NODE
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: SA
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.serviceAccountName
+          - name: TERM
+            value: xterm
+        image: lalyos/k8s-workshop
+        name: dev
+        resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: session
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.org/websocket-services: frontend-$(SESSION)
+  name: ing
+spec:
+  rules:
+  - host: $(SESSION).$(DOMAIN)
+    http:
+      paths:
+      - backend:
+          serviceName: frontend
+          servicePort: 8080

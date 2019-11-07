@@ -1,0 +1,5 @@
+bases:
+  - ../base/init
+  - ../overlay/workshop/generic
+  - ../overlay/user-ns
+  

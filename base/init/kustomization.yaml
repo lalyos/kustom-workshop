@@ -1,0 +1,7 @@
+commonLabels:
+  user: workshop
+
+resources:
+- namespace.yaml
+- configmap.yaml
+- clusterroles.yaml

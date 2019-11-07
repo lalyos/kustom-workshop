@@ -1,0 +1,45 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: lister
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: common-config
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - common
+  resources:
+  - configmaps
+  verbs:
+  - list
+  - get
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sshreader
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - sshfront
+  resources:
+  - services
+  verbs:
+  - list
+  - get
