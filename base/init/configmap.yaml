@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
-  #domain: bud.k8z.eu
-  domain: bud.dev
+  domain: bud.k8z.eu
+  #domain: bud.dev
   chat: http://gitter.im/lalyos/bud
 kind: ConfigMap
 metadata:
