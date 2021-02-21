@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: session
@@ -12,4 +12,4 @@ spec:
       - name: dev
         volumeMounts:
           - mountPath: /root/workshop
-            name: gitrepo 
+            name: gitrepo
